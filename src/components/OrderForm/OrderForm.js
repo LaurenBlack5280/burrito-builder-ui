@@ -10,21 +10,40 @@ class OrderForm extends Component {
     };
   }
 
-  handleChange = e => {
-    this.setState({ [e.target.name]: e.target.value })
-  }
-
   handleNameChange = e => {
-    this.handleChange(e)
+    this.setState({ [e.target.name]: e.target.value })
+
   }
 
   handleIngredientChange = e => {
-    e.preventDefault();
-    this.handleChange(e)
+    e.preventDefault()
+    
+    //this.setState({ [e.target.name]: e.target.value })
+
+    // this.setState({
+    //   ingredients: [...this.state.ingredients]
+    // })
+    //console.log('ingredients', this.state.ingredients)
+    //console.log('name', this.state.name)
+   console.log(' state', this.state)
+   console.log('props', this.props.orders)
   }
 
   handleSubmit = e => {
     e.preventDefault();
+    fetch('http://localhost:3001/api/v1/orders', {
+      method: 'POST',
+      body: JSON.stringify(),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(res => res.json())
+    .then(res => {
+      console.log(res)
+      
+    })
+    .catch(err => console.log(err))
     this.clearInputs();
   }
 
@@ -36,7 +55,7 @@ class OrderForm extends Component {
     const possibleIngredients = ['beans', 'steak', 'carnitas', 'sofritas', 'lettuce', 'queso fresco', 'pico de gallo', 'hot sauce', 'guacamole', 'jalapenos', 'cilantro', 'sour cream'];
     const ingredientButtons = possibleIngredients.map(ingredient => {
       return (
-        <button key={ingredient} name={ingredient}  onClick={e => this.handleIngredientChange(e)}>
+        <button key={ingredient} name={ingredient} onClick={e => this.handleIngredientChange(e)}>
           {ingredient}
         </button>
       )

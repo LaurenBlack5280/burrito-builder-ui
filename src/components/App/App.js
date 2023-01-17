@@ -22,12 +22,14 @@ class App extends Component {
      
   }
 
+  
+
   render() {
     return (
       <main className="App">
         <header>
           <h1>Burrito Builder</h1>
-          <OrderForm />
+          <OrderForm orders={this.state.orders}/>
         </header>
 
         <Orders orders={this.state.orders}/>
