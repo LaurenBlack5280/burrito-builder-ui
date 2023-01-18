@@ -30,22 +30,26 @@ class OrderForm extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    console.log(this.state)
-    
+    console.log('ingredients', this.state.ingredients)
+    console.log('name', this.state.name)
+    const newOrder = {
+      name: this.state.name, 
+      ingredients: this.state.ingredients
+    }
 
-    // fetch('http://localhost:3001/api/v1/orders', {
-    //   method: 'POST',
-    //   body: JSON.stringify(),
-    //   headers: {
-    //     'Content-Type': 'application/json'
-    //   }
-    // })
-    // .then(res => res.json())
-    // .then(res => {
-    //   console.log(res)
+    fetch('http://localhost:3001/api/v1/orders', {
+      method: 'POST',
+      body: JSON.stringify(newOrder),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(res => res.json())
+    .then(res => {
+      console.log(res)
       
-    // })
-    //.catch(err => console.log(err))
+    })
+    .catch(err => console.log(err))
     this.clearInputs();
   }
 
