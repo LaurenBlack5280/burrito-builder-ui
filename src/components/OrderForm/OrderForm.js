@@ -17,16 +17,19 @@ class OrderForm extends Component {
 
   handleIngredientChange = e => {
     e.preventDefault()
-    
-    //this.setState({ [e.target.name]: e.target.value })
+    console.log(e.target.value)
+    console.log(e.target.name)
+    const newIngredient = e.target.name
 
-    // this.setState({
-    //   ingredients: [...this.state.ingredients]
-    // })
+    /*
+    add at least 1 ingredient to an ingredients list within the order
+     */
+    this.setState({ ingredients: [...this.state.ingredients, newIngredient]})
+    //console.log(ingredient)
     //console.log('ingredients', this.state.ingredients)
     //console.log('name', this.state.name)
    console.log(' state', this.state)
-   console.log('props', this.props.orders)
+   //console.log('props', this.props)
   }
 
   handleSubmit = e => {
@@ -55,7 +58,7 @@ class OrderForm extends Component {
     const possibleIngredients = ['beans', 'steak', 'carnitas', 'sofritas', 'lettuce', 'queso fresco', 'pico de gallo', 'hot sauce', 'guacamole', 'jalapenos', 'cilantro', 'sour cream'];
     const ingredientButtons = possibleIngredients.map(ingredient => {
       return (
-        <button key={ingredient} name={ingredient} onClick={e => this.handleIngredientChange(e)}>
+        <button key={ingredient} name={ingredient}  onClick={e => this.handleIngredientChange(e)}>
           {ingredient}
         </button>
       )
