@@ -17,36 +17,35 @@ class OrderForm extends Component {
 
   handleIngredientChange = e => {
     e.preventDefault()
-    console.log(e.target.value)
-    console.log(e.target.name)
     const newIngredient = e.target.name
-
-    /*
-    add at least 1 ingredient to an ingredients list within the order
-     */
     this.setState({ ingredients: [...this.state.ingredients, newIngredient]})
-    //console.log(ingredient)
-    //console.log('ingredients', this.state.ingredients)
-    //console.log('name', this.state.name)
-   console.log(' state', this.state)
-   //console.log('props', this.props)
+    this.handleValidation()
+  }
+
+  handleValidation = () => {
+    if (!this.state.ingredients || !this.state.name) {
+      throw new Error('This is a required field')
+    }
   }
 
   handleSubmit = e => {
     e.preventDefault();
-    fetch('http://localhost:3001/api/v1/orders', {
-      method: 'POST',
-      body: JSON.stringify(),
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-    .then(res => res.json())
-    .then(res => {
-      console.log(res)
+    console.log(this.state)
+    
+
+    // fetch('http://localhost:3001/api/v1/orders', {
+    //   method: 'POST',
+    //   body: JSON.stringify(),
+    //   headers: {
+    //     'Content-Type': 'application/json'
+    //   }
+    // })
+    // .then(res => res.json())
+    // .then(res => {
+    //   console.log(res)
       
-    })
-    .catch(err => console.log(err))
+    // })
+    //.catch(err => console.log(err))
     this.clearInputs();
   }
 
@@ -58,7 +57,7 @@ class OrderForm extends Component {
     const possibleIngredients = ['beans', 'steak', 'carnitas', 'sofritas', 'lettuce', 'queso fresco', 'pico de gallo', 'hot sauce', 'guacamole', 'jalapenos', 'cilantro', 'sour cream'];
     const ingredientButtons = possibleIngredients.map(ingredient => {
       return (
-        <button key={ingredient} name={ingredient}  onClick={e => this.handleIngredientChange(e)}>
+        <button key={ingredient} name={ingredient} onClick={e => this.handleIngredientChange(e)}>
           {ingredient}
         </button>
       )
@@ -72,6 +71,7 @@ class OrderForm extends Component {
           name='name'
           value={this.state.name}
           onChange={e => this.handleNameChange(e)}
+          required
         />
 
         { ingredientButtons }
