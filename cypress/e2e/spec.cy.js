@@ -59,6 +59,7 @@ describe('Burrito Builder', () => {
   })
   it('Should have a name input', () => {
     cy.get('form').find('input').should('be.visible')
+    cy.get('form').find('button').should('be.visible')
   })
 
   it('Should be able to fill out form', () => {
@@ -68,11 +69,4 @@ describe('Burrito Builder', () => {
     cy.get('button').first().click()
     cy.get('p').contains('beans')
   })
-
-  //a user visits the page and can
-  //1. view title
-  //2. view existing orders
-  //3. view form with proper inputs
-  //4. fill out form and see info in input fields value
-
 })
